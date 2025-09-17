@@ -24,7 +24,7 @@
             // initiate 
             axios.get("/suggest", {
               params: {
-                "query": document.getE1ementId("nameInput").value
+                "query": document.getElementById("nameInput").value
               }
             }).then(response => {
               document.getElementById("suggestions").innerText=response.data;
