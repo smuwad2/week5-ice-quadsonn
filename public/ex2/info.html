@@ -23,9 +23,63 @@
 
         </div>
         <script>
-            function getData() {
+            async function getData() {
+           const typeval = document.getElementById("type").value;
+           const limitval = document.createElementbyId("limit").value;
  
             }
+        try {
+            const response = 
+            await axios.get("/data", {
+                params: {
+                    "type": typeval,
+                    "limit": limitval
+                }
+            });
+        } catch (error){
+            console.log(error);
+        }
+
+        function generatetable(dataObj){
+            const h2Elem=document.createElement("h2");
+            while (resultDivElem.firstChild){
+                resultDivElem.firstChild.remove;
+            }
+            h2Elem.innerText=dataObj["type"];
+            resultDivElem.appendChild(h2Elem);
+            const tableElem=document.createElement("table");
+            tableElem.cassName="table";
+            const tBodyElem=document.createElement("tbody");
+            const trElem=document.createElement("tr");
+            const tblHeadings=Object.keys(dataObj["records"][0]);
+            for (const headings of tblHeadings){
+                const thElem = document.createElement("th");
+                thElem.innerText=headingVal;
+                trElem.appendChild(thElem);
+            }
+            tBodyElem.appendChild(trElem);
+            tableElem.appendChild(tBodyElem);
+            resultDivElem.appendChild(tableElem);
+
+            for (let i=0; i<dataObj["records"].length;i++){
+                const trElem=document.createElement("tr");
+
+                for(let j=0;j<tblHeadings.length;j++){
+                const propVal = dataObj["records"][i][tblHeadings[j]];
+                const tdElem = document.createElement("td");
+                tdElem.innerText = propVal;
+                trElem.append(tdElem);
+                }
+                tBodyElem.appendChild(tBodyElem);
+                resultDivElem.appendChild(tableElem);
+
+
+            }
+
+
+
+        }
+    
 
         </script>
 </body>
